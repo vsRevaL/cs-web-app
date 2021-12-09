@@ -1,10 +1,10 @@
-# Car-Sharing application ~ Hungarian 🚗🌍
+# 🚗Car-Sharing application ~ Hungarian 🌍
 
 ![app_gif](images/app.gif)
 
 ## Introduction
 
-This application was one of my university assignments, it's basically a car-sharing/car-pooling `MVC` application containing
+This application was one of my university assignments, it's basically a car-sharing/car-pooling `MVC` application, using [w3layouts](https://w3layouts.com/), and containing
 
 - `Guest` functions
 - `User` functions
