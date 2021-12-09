@@ -1,0 +1,123 @@
+﻿@using Microsoft.EntityFrameworkCore;
+@using System;
+@using Microsoft.AspNetCore.Http
+@using System.Collections.Generic;
+@using System.ComponentModel;
+@using System.Data;
+@using System.Drawing;
+@using System.Linq;
+@using System.Text;
+@using System.Threading.Tasks;
+@using System.Text.Json;
+@{
+    var filteredRoutes = Model;
+    var x = Context.Session.GetString("LoggedIn");
+
+}
+
+<section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container py-2">
+            <h2 class="title">Indulások</h2>
+        </div>
+    </div>
+</section>
+
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+            text-align: center;
+        }
+</style>
+
+<section class="w3l-contact" id="contact">
+    <div class="contact-infubd py-5">
+        <div class="container py-lg-3">
+            <div class="contact-grids row">
+
+                <table id="customers" data-show-toggle="false" data-expand-first="true">
+                    <tr>
+                        <th style="display:none;">ID</th>
+                        <th>Honnan</th>
+                        <th>Hova</th>
+                        <th>Távolság (Km)</th>
+                        <th>Időpont</th>
+                        <th>Helyek</th>
+                        <th>Ár</th>
+                        <th>Csatlakozás</th>
+                        @if (x == "admin")
+                        {
+                            <th>Foglalás másnak</th>
+                            <th>Út Módosítása</th>
+                        }
+                    </tr>
+                    @foreach (Route item in filteredRoutes)
+                    {
+                <tr>
+                    <td style="display:none;">@item.Id</td>
+                    <td>@item.FromCity</td>
+                    <td>@item.ToCity</td>
+                    <td>@item.Km</td>
+                    <td>@item.When</td>
+                    <td>@item.Seats / @item.Bookings.Count</td>
+                    <td>@(@JsonData.CostKm * @item.Km)</td>
+                    @if (item.Seats == item.Bookings.Count)
+                    {
+                        <td></td>
+                    }
+                    else
+                    {
+                        @if (x == null)
+                        {
+
+                            <td>@Html.ActionLink("Helyfoglalás", "AddBookingHome", "Home", new { @routeIdStr = item.Id.ToString() })</td>
+                        }
+                        else if (x != null && x == "admin")
+                        {
+                            <td>@Html.ActionLink("Helyfoglalás", "AddBookingUser", "User", new { @routeIdStr = item.Id.ToString() })</td>
+                            <td>@Html.ActionLink("Foglalás másnak", "AddBookingHome", "Home", new { @routeIdStr = item.Id.ToString() })</td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink("Helyfoglalás", "AddBookingUser", "User", new { @routeIdStr = item.Id.ToString() })</td>
+
+                        }
+                    }
+                    @if (x == "admin")
+                    {
+                        <td>@Html.ActionLink("Módosít", "EditRoute", "Admin", new { @routeIdStr = item.Id.ToString() })</td>
+                    }
+                </tr>
+                    }
+
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</section>

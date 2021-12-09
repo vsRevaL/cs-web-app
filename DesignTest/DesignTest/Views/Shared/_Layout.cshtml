@@ -1,0 +1,154 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var x = Context.Session.GetString("LoggedIn");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVCarPool</title>
+
+    <link href="~/assets/css/style-starter.css" rel="stylesheet" />
+    <a href="~/assets/fonts/fontawesome-webfont.eot"></a>
+    <a href="~/assets/fonts/fontawesome-webfont.ttf"></a>
+    <a href="~/assets/fonts/fontawesome-webfont.woff"></a>
+    <a href="~/assets/fonts/fontawesome-webfont.woff2"></a>
+    <a href="~/assets/fonts/FontAwesome.otf"></a>
+
+    <script src="~/assets/js/all.js"></script>
+    <script src="~/assets/js/app.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="~/assets/js/jquery.countup.js"></script>
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/jquery.waypoints.min.js"></script>
+    <script src="~/assets/js/jquery.zoomslider.min.js"></script>
+    <script src="~/assets/js/lightbox-plus-jquery.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/modernizr-2.6.2.min.js"></script>
+    <script src="~/assets/js/owl.carousel.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/theme-change.js"></script>
+
+</head>
+<body>
+    <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke">
+                <h1>
+                    <a class="navbar-brand mr-lg-5" asp-area="" asp-controller="Home" asp-action="Index">
+                        MVCarPool
+                    </a>
+                </h1>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+                        data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Kezdőlap</a>
+                        </li>
+
+                        @if (x != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="MyBookings">Foglalásaim</a>
+                            </li>
+                        }
+                        @if (x == "admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="AddNewRoute">Út hozzáadása</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Diagram">Statisztika</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="d-lg-block d-none">
+                    @if (x == null)
+                    {
+                        <a class="btn btn-style btn-secondary" asp-area="" asp-controller="Identity" asp-action="Login">Bejelentkezés</a>
+                        <a class="btn btn-style btn-secondary" asp-area="" asp-controller="Identity" asp-action="Register">Regisztráció</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-style btn-secondary" asp-area="" asp-controller="Identity" asp-action="Logout">Kijelentkezés</a>
+                        <a class="btn btn-style btn-secondary" asp-area="" asp-controller="" asp-action="">Szia @x</a>
+                    }
+
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+
+    </header>
+
+    @RenderBody()
+
+<iframe class="w-100"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1389063.6425128083!2d18.383948747856092!3d47.157562075521845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741837bdf37e4c3%3A0xc4290c1e1010!2sMagyarorsz%C3%A1g!5e0!3m2!1shu!2shu!4v1635424892687!5m2!1shu!2shu"
+        height="666" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+
+    <!--/MENU-JS-->
+    <script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+    <!--//MENU-JS-->
+
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

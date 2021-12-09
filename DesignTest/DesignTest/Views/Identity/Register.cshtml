@@ -1,0 +1,114 @@
+﻿@model Useer
+<section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container py-2">
+            <h2 class="title">Regisztráció</h2>
+        </div>
+    </div>
+</section>
+
+<section class="w3l-contact" id="contact">
+    <div class="contact-infubd py-5">
+        <div class="container py-lg-3">
+            <div class="contact-grids row">
+                <div class="col-lg-6 contact-left">
+                    <div class="partners">
+                        <div class="cont-details">
+                            <h5>Facts</h5>
+                            <p>
+                                Az úton lévő autók számának csökkentésével telekocsi csökkenti a környezetszennyezést, <br /><br />
+                                <br />
+                                Csökkenti a szükséges parkolóhelyek számát, és globális szempontból csökkenti az üvegházhatást okozó gázok kibocsátását.<br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+
+                    @using (Html.BeginForm("Register", "Identity", FormMethod.Post, new { @class = "signin-form" }))
+                    {
+                        <div class="input-grids">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Username, new
+                                   {
+                                       @type = "text",
+                                       @placeholder = "Felhasználóneved*",
+                                       @class = "contact-input",
+
+                                   })
+                                @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Email, new
+                                   {
+                                       @type = "email",
+                                       @placeholder = "Email címed*",
+                                       @class = "contact-input",
+
+                                   })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Password, new
+                                   {
+                                       @type = "password",
+                                       @placeholder = "Jelszavad*",
+                                       @class = "contact-input",
+
+                                   })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new
+                                   {
+                                       @type = "password",
+                                       @placeholder = "Jelszó újra*",
+                                       @class = "contact-input",
+
+                                   })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Name, new
+                                   {
+                                       @type = "text",
+                                       @placeholder = "Neved*",
+                                       @class = "contact-input",
+
+                                   })
+                                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Address, new
+                                   {
+                                       @type = "text",
+                                       @placeholder = "Címed*",
+                                       @class = "contact-input",
+
+                                   })
+                                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Phone, new
+                                   {
+                                       @type = "text",
+                                       @placeholder = "Telefonszámod*",
+                                       @class = "contact-input",
+
+                                   })
+                                @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-style btn-primary">Regisztrálok</button>
+                            <button type="reset" class="btn btn-style btn-primary">Alaphelyzet</button>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

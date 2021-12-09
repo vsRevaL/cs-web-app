@@ -1,0 +1,105 @@
+﻿@using DesignTest.Models;
+@model Route;
+
+@{
+    Dictionary<string, int> map = ViewBag.Map;
+    if (map == null)
+    {
+        map = new Dictionary<string, int>();
+    }
+}
+
+<section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container py-2">
+            <h2 class="title">Statisztika</h2>
+        </div>
+    </div>
+</section>
+
+<section class="w3l-contact" id="contact">
+    <div class="contact-infubd py-5">
+        <div class="container py-lg-3">
+            <div class="contact-grids row">
+                <div class="col-lg-6 contact-left">
+                    <div class="partners">
+                        <div class="cont-details">
+                            <!--Div that will hold the pie chart-->
+                            <div id="chart_div"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+
+
+
+                    <form method="post" asp-controller="Admin" asp-action="Diagram" class="booking-form">
+                        <div class="input-grids">
+                            <div class="form-group">
+                                <input style="border:1px solid black" placeholder="Mikortól" class="textbox-n" type="text" onfocus="(this.type='date')" id="date" name="fromWhen">
+                            </div>
+                            <div class="form-group">
+                                <input style="border:1px solid black" placeholder="Meddig" class="textbox-n" type="text" onfocus="(this.type='date')" id="date" name="untilWhen">
+                            </div>
+                            <div class="form-group">
+                                <select name="selectpicker" style="border:1px solid black">
+                                    <option value="from">Indulási hely</option>
+                                    <option value="to">Érkezési hely</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-style btn-primary">Szűrés</button>
+                            <button type="reset" class="btn btn-style btn-primary">Alaphelyzet</button>
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Település');
+        data.addColumn('number', 'Foglalás');
+        data.addRows([
+          @foreach (KeyValuePair<string, int> item in map)
+          {
+              @Html.Raw(string.Format("['{0}', {1}],", item.Key, item.Value));
+          }
+        ]);
+
+        // Set chart options
+        var options = {
+            'title': 'Intervallumban szereplő foglalások [Érkezési/Indulási] hely szerint:',
+            'width': 720,
+            'height': 480
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>

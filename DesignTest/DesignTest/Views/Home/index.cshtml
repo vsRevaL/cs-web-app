@@ -1,0 +1,102 @@
+﻿@{
+    var routesForSelectpicker = Model;
+}
+
+<!-- //header -->
+<!--banner-slider-->
+<!-- main-slider -->
+<section class="w3l-main-slider" id="home">
+    <div class="banner-content">
+        <div id="demo-1"
+             data-zs-src='[
+                 "assets/images/banner1.jpg",
+                 "assets/images/banner2.jpg",
+                 "assets/images/banner8.jpg",
+                 "assets/images/banner77.jpg",
+                 "assets/images/banner6.jpg"
+             ]'
+             data-zs-overlay="dots">
+            <div class="demo-inner-content">
+                <div class="container">
+                    <div class="banner-infhny">
+                        <h3>Kezdőlap</h3>
+                        <h6 class="mb-3">Utak böngészése</h6>
+                        <div class="flex-wrap search-wthree-field mt-md-5 mt-4">
+
+                            <form method="post" asp-controller="Home" asp-action="ListRoutes" class="booking-form">
+                                <div class="row book-form">
+                                    <div class="form-input col-md-4 mt-md-0 mt-3">
+                                        <select name="selectpicker" class="selectpicker">
+                                            <option value="all">Az összes út</option>
+                                            @foreach (var item in routesForSelectpicker)
+                                            {
+                                                <option value="@item">@item</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-input col-md-4 mt-md-0 mt-3">
+                                        <input placeholder="Mikortól➝" class="textbox-n" type="text" onfocus="(this.type='date')" id="date" name="fromwhen">
+                                    </div>
+                                    <div class="bottom-btn col-md-4 mt-md-0 mt-3">
+                                        <button type="submit" class="btn btn-style btn-secondary">
+                                            <span class="fa fa-search mr-3" aria-hidden="true">
+                                            </span> 
+                                                Keresés
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Template JavaScript -->
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<script src="assets/js/theme-change.js"></script>
+<!--/slider-js-->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/modernizr-2.6.2.min.js"></script>
+<script src="assets/js/jquery.zoomslider.min.js"></script>
+<!--//slider-js-->
+<script src="assets/js/owl.carousel.js"></script>
+<!-- script for tesimonials carousel slider -->
+<script>
+    $(document).ready(function () {
+        $("#owl-demo1").owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: false,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                1000: {
+                    items: 1,
+                    nav: false,
+                    loop: true
+                }
+            }
+        })
+    })
+</script>
+<!-- //script for tesimonials carousel slider -->
+<!-- stats number counter-->
+<script src="assets/js/jquery.waypoints.min.js"></script>
+<script src="assets/js/jquery.countup.js"></script>
+<script>
+    $('.counter').countUp();
+</script>
+<!-- //stats number counter -->
+
