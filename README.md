@@ -24,31 +24,7 @@ This application was one of my university assignments, it's basically a car-shar
 
 ![img_3.png](images/img_3.png)
 
-## Launching
 
-- It's complex, I haven't figured out yet
-
-
-- Data Connections - right click - Add Connection
-- Browse the `Database1.mdf` (can be found in the project folder)
-- Press <b>OK<b>
-
-![img.png](images/run1.png)
-
-![img_3.png](images/run2.png)
-
-- Tools - NuGet Package Manager
-- Package Manager Console
-- `Scaffold-DbContext "here you paste the connection string" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -Context PatientDB`
-- Press Enter
-
-![img_1.png](images/run3.png)
-
-- If red notification occurs, paste the command again with `-Force` at the end
-
-![img_2.png](images/run4.png)
-
-- The program is connected to the database but will not work properly.
 
 <br>
 <br>
